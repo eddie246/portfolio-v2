@@ -8,12 +8,12 @@ import {
   SegmentObject,
   Segments,
   Shadow,
-  useGLTF,
+  useGLTF
 } from '@react-three/drei';
 import {
   Bloom,
   EffectComposer,
-  SelectiveBloom,
+  SelectiveBloom
 } from '@react-three/postprocessing';
 import { Perf } from 'r3f-perf';
 import { Suspense } from 'react';
@@ -27,9 +27,11 @@ export default function Experience() {
 
   return (
     <>
-      <Perf position='top-left' />
+      <Perf position="top-left" />
       <color attach={'background'} args={['#111']} />
-
+      <Gltf src="./main.glb" />
+      <Gltf src="./main.glb" />
+      <Gltf src="./main.glb" />
       <EffectComposer>
         <Bloom
           mipmapBlur
@@ -41,17 +43,17 @@ export default function Experience() {
 
       <OrbitControls makeDefault />
 
-      {/* <ambientLight intensity={1} /> */}
-      {/* <Environment background blur={0.5} files='night.hdr' /> */}
-      {/* <spotLight
+      <ambientLight intensity={1} />
+      <Environment background blur={0.5} files="night.hdr" />
+      <spotLight
         intensity={0.5}
         angle={0.1}
         penumbra={1}
         position={[20, 50, 20]}
         castShadow
-      /> */}
+      />
 
-      {/* <Line
+      <Line
         ref={(obj) => {
           obj && (obj.material.toneMapped = false);
         }}
@@ -61,9 +63,9 @@ export default function Experience() {
         vertexColors={[
           [0, 0, 0],
           [2, 0, 0],
-          [1, 1, 0],
-          [1, 1, 0],
-          [1, 1, 0],
+          [1, 10, 0],
+          [1, 10, 0],
+          [1, 10, 0],
           [1, 1, 0],
           [1, 1, 0],
           [1, 1, 0],
@@ -78,11 +80,11 @@ export default function Experience() {
           [1, 1, 0],
           [0, 0, 20],
           [0, 0, 20],
-          [0, 0, 20],
+          [0, 0, 20]
         ]}
-      /> */}
+      />
 
-      <line geometry={nodes.BezierCurve.geometry}>
+      {/*<line geometry={nodes.BezierCurve.geometry}>
         <lineBasicMaterial
           ref={(obj) => console.log(obj)}
           color={[10, 10, 10]}
@@ -100,7 +102,7 @@ export default function Experience() {
             [1, 0, 0],
           ]}
         />
-      </line>
+        </line> */}
 
       {/* <mesh>
         <boxGeometry />
