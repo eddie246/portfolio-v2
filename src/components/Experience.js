@@ -8,12 +8,12 @@ import {
   SegmentObject,
   Segments,
   Shadow,
-  useGLTF
+  useGLTF,
 } from '@react-three/drei';
 import {
   Bloom,
   EffectComposer,
-  SelectiveBloom
+  SelectiveBloom,
 } from '@react-three/postprocessing';
 import { Perf } from 'r3f-perf';
 import { Suspense } from 'react';
@@ -27,15 +27,13 @@ export default function Experience() {
 
   return (
     <>
-      <Perf position="top-left" />
+      <Perf position='top-left' />
       <color attach={'background'} args={['#111']} />
-      <Gltf src="./main.glb" />
-      <Gltf src="./main.glb" />
-      <Gltf src="./main.glb" />
+      {/* <Gltf src='./main.glb' /> */}
       <EffectComposer>
         <Bloom
           mipmapBlur
-          // luminanceThreshold={0.1}
+          // luminanceThreshold={0.5}
           luminanceSmoothing={0}
           intensity={1}
         />
@@ -43,8 +41,8 @@ export default function Experience() {
 
       <OrbitControls makeDefault />
 
-      <ambientLight intensity={1} />
-      <Environment background blur={0.5} files="night.hdr" />
+      {/* <ambientLight intensity={1} /> */}
+      {/* <Environment background blur={0.5} files='night.hdr' /> */}
       <spotLight
         intensity={0.5}
         angle={0.1}
@@ -54,9 +52,11 @@ export default function Experience() {
       />
 
       <Line
-        ref={(obj) => {
-          obj && (obj.material.toneMapped = false);
-        }}
+        // ref={(obj) => {
+        //   obj && (obj.material.toneMapped = false);
+        // }}
+        toneMapped={false}
+        needsUpdate
         lineWidth={1}
         color={[1, 1, 1]}
         points={[...nodes.BezierCurve.geometry.attributes.position.array]}
@@ -80,7 +80,7 @@ export default function Experience() {
           [1, 1, 0],
           [0, 0, 20],
           [0, 0, 20],
-          [0, 0, 20]
+          [0, 0, 20],
         ]}
       />
 
