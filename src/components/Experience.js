@@ -29,7 +29,7 @@ export default function Experience() {
     <>
       <Perf position='top-left' />
       <color attach={'background'} args={['#111']} />
-      {/* <Gltf src='./main.glb' /> */}
+      <Gltf src='./main.glb' />
       <EffectComposer>
         <Bloom
           mipmapBlur
