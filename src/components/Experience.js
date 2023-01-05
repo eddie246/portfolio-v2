@@ -29,7 +29,11 @@ export default function Experience() {
     <>
       <Perf position="top-left" />
       <color attach={"background"} args={["#111"]} />
-      <Gltf src="./main.glb" />
+      <Gltf receiveShadow castShadow src="./main.glb" />
+      {/* <Gltf receiveShadow castShadow src="./main.glb" position={[0, 0, 10]} />
+      <Gltf receiveShadow castShadow src="./main.glb" position={[0, 0, 20]} />
+      <Gltf receiveShadow castShadow src="./main.glb" position={[0, 0, -10]} />
+      <Gltf receiveShadow castShadow src="./main.glb" position={[0, 0, -20]} /> */}
       <EffectComposer>
         <Bloom
           mipmapBlur
@@ -42,16 +46,21 @@ export default function Experience() {
       <OrbitControls makeDefault />
 
       {/* <ambientLight intensity={1} /> */}
-      {/* <Environment background blur={0.5} files='night.hdr' /> */}
+      <Environment
+        background
+        blur={0.5}
+        // files="night.hdr"
+        files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/satara_night_no_lamps_1k.hdr"
+      />
       <spotLight
-        intensity={0.5}
+        intensity={0.1}
         angle={0.1}
         penumbra={1}
-        position={[20, 50, 20]}
+        position={[20, 60, 20]}
         castShadow
       />
 
-      <Line
+      {/* <Line
         // ref={(obj) => {
         //   obj && (obj.material.toneMapped = false);
         // }}
@@ -82,7 +91,7 @@ export default function Experience() {
           [0, 0, 20],
           [0, 0, 20],
         ]}
-      />
+      /> */}
 
       {/*<line geometry={nodes.BezierCurve.geometry}>
         <lineBasicMaterial
