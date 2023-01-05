@@ -9,27 +9,27 @@ import {
   Segments,
   Shadow,
   useGLTF,
-} from "@react-three/drei";
+} from '@react-three/drei';
 import {
   Bloom,
   EffectComposer,
   SelectiveBloom,
-} from "@react-three/postprocessing";
-import { Perf } from "r3f-perf";
-import { Suspense } from "react";
+} from '@react-three/postprocessing';
+import { Perf } from 'r3f-perf';
+import { Suspense } from 'react';
 
 export default function Experience() {
-  console.log("Render");
+  console.log('Render');
 
-  const { nodes, materials } = useGLTF("./line.glb");
+  const { nodes, materials } = useGLTF('./line.glb');
 
   console.log(nodes, materials);
 
   return (
     <>
-      <Perf position="top-left" />
-      <color attach={"background"} args={["#111"]} />
-      <Gltf src="./main.glb" />
+      <Perf position='top-left' />
+      <color attach={'background'} args={['#111']} />
+      <Gltf receiveShadow castShadow src='./main.glb' />
       <EffectComposer>
         <Bloom
           mipmapBlur
@@ -42,12 +42,17 @@ export default function Experience() {
       <OrbitControls makeDefault />
 
       {/* <ambientLight intensity={1} /> */}
-      {/* <Environment background blur={0.5} files='night.hdr' /> */}
+      <Environment
+        background
+        blur={0.5}
+        // files="night.hdr"
+        files='https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/satara_night_no_lamps_1k.hdr'
+      />
       <spotLight
-        intensity={0.5}
+        intensity={0.1}
         angle={0.1}
         penumbra={1}
-        position={[20, 50, 20]}
+        position={[20, 60, 20]}
         castShadow
       />
 
