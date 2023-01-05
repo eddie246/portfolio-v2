@@ -30,6 +30,10 @@ export default function Experience() {
       <Perf position='top-left' />
       <color attach={'background'} args={['#111']} />
       <Gltf receiveShadow castShadow src='./main.glb' />
+      {/* <Gltf receiveShadow castShadow src="./main.glb" position={[0, 0, 10]} />
+      <Gltf receiveShadow castShadow src="./main.glb" position={[0, 0, 20]} />
+      <Gltf receiveShadow castShadow src="./main.glb" position={[0, 0, -10]} />
+      <Gltf receiveShadow castShadow src="./main.glb" position={[0, 0, -20]} /> */}
       <EffectComposer>
         <Bloom
           mipmapBlur
@@ -56,7 +60,7 @@ export default function Experience() {
         castShadow
       />
 
-      <Line
+      {/* <Line
         // ref={(obj) => {
         //   obj && (obj.material.toneMapped = false);
         // }}
@@ -87,7 +91,7 @@ export default function Experience() {
           [0, 0, 20],
           [0, 0, 20],
         ]}
-      />
+      /> */}
 
       {/*<line geometry={nodes.BezierCurve.geometry}>
         <lineBasicMaterial
