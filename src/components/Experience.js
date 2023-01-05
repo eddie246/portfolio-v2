@@ -9,27 +9,27 @@ import {
   Segments,
   Shadow,
   useGLTF,
-} from '@react-three/drei';
+} from "@react-three/drei";
 import {
   Bloom,
   EffectComposer,
   SelectiveBloom,
-} from '@react-three/postprocessing';
-import { Perf } from 'r3f-perf';
-import { Suspense } from 'react';
+} from "@react-three/postprocessing";
+import { Perf } from "r3f-perf";
+import { Suspense } from "react";
 
 export default function Experience() {
-  console.log('Render');
+  console.log("Render");
 
-  const { nodes, materials } = useGLTF('./line.glb');
+  const { nodes, materials } = useGLTF("./line.glb");
 
   console.log(nodes, materials);
 
   return (
     <>
-      <Perf position='top-left' />
-      <color attach={'background'} args={['#111']} />
-      <Gltf src='./main.glb' />
+      <Perf position="top-left" />
+      <color attach={"background"} args={["#111"]} />
+      <Gltf src="./main.glb" />
       <EffectComposer>
         <Bloom
           mipmapBlur
