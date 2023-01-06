@@ -9,27 +9,27 @@ import {
   Segments,
   Shadow,
   useGLTF,
-} from '@react-three/drei';
+} from "@react-three/drei";
 import {
   Bloom,
   EffectComposer,
   SelectiveBloom,
-} from '@react-three/postprocessing';
-import { Perf } from 'r3f-perf';
-import { Suspense } from 'react';
+} from "@react-three/postprocessing";
+import { Perf } from "r3f-perf";
+import { Suspense } from "react";
 
 export default function Experience() {
-  console.log('Render');
+  console.log("Render");
+  console.log("hello ");
 
-  const { nodes, materials } = useGLTF('./line.glb');
-
-  console.log(nodes, materials);
+  const { nodes, materials } = useGLTF("./line.glb");
 
   return (
     <>
-      <Perf position='top-left' />
-      <color attach={'background'} args={['#111']} />
-      <Gltf receiveShadow castShadow src='./main.glb' />
+      <Perf position="top-left" />
+      <color attach={"background"} args={["#111"]} />
+      {/* <fog attach="fog" args={["#17171b", 30, 140]} /> */}
+      <Gltf receiveShadow castShadow src="./main.glb" />
       {/* <Gltf receiveShadow castShadow src="./main.glb" position={[0, 0, 10]} />
       <Gltf receiveShadow castShadow src="./main.glb" position={[0, 0, 20]} />
       <Gltf receiveShadow castShadow src="./main.glb" position={[0, 0, -10]} />
@@ -37,9 +37,9 @@ export default function Experience() {
       <EffectComposer>
         <Bloom
           mipmapBlur
-          // luminanceThreshold={0.5}
+          luminanceThreshold={0.5}
           luminanceSmoothing={0}
-          intensity={1}
+          intensity={2}
         />
       </EffectComposer>
 
@@ -48,22 +48,30 @@ export default function Experience() {
       {/* <ambientLight intensity={1} /> */}
       <Environment
         background
-        blur={0.5}
+        // blur={0.5}
         // files="night.hdr"
-        files='https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/satara_night_no_lamps_1k.hdr'
+        files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/satara_night_no_lamps_1k.hdr"
       />
-      <spotLight
+      <directionalLight
+        castShadow
+        intensity={0.06}
+        position={[20, 100, 0]}
+        color={"#2b3c8f"}
+      />
+      {/* <spotLight
         intensity={0.1}
         angle={0.1}
         penumbra={1}
         position={[20, 60, 20]}
         castShadow
-      />
+      /> */}
 
-      {/* <Line
+      <Line
         // ref={(obj) => {
         //   obj && (obj.material.toneMapped = false);
         // }}
+
+        position={[5, 2, 0]}
         toneMapped={false}
         needsUpdate
         lineWidth={1}
@@ -91,7 +99,7 @@ export default function Experience() {
           [0, 0, 20],
           [0, 0, 20],
         ]}
-      /> */}
+      />
 
       {/*<line geometry={nodes.BezierCurve.geometry}>
         <lineBasicMaterial
@@ -135,7 +143,7 @@ export default function Experience() {
 
       <mesh receiveShadow rotation-x={-Math.PI * 0.5} scale={10}>
         <planeGeometry args={[100, 100]} />
-        <meshStandardMaterial envMapIntensity={0.2} />
+        <meshStandardMaterial envMapIntensity={1} />
       </mesh>
     </>
   );
