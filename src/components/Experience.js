@@ -8,21 +8,36 @@ import {
   SegmentObject,
   Segments,
   Shadow,
+  SoftShadows,
   useGLTF,
 } from "@react-three/drei";
 import {
   Bloom,
   EffectComposer,
   SelectiveBloom,
+  N8AO,
+  SMAA,
+  FXAA,
 } from "@react-three/postprocessing";
 import { Perf } from "r3f-perf";
 import { Suspense } from "react";
+import { useControls } from "leva";
 
 export default function Experience() {
   console.log("Render");
   console.log("hello ");
 
   const { nodes, materials } = useGLTF("./line.glb");
+
+  const N8AOConfig = useControls({
+    intensity: { value: 3.5, min: 0, max: 20 },
+    color: "#27192a",
+    aoRadius: { value: 3.9, min: 0, max: 10 },
+    aoSamples: { value: 12, min: 1, max: 64, step: 1 },
+    denoiseSamples: { value: 5, min: 1, max: 12, step: 1 },
+    denoiseRadius: { value: 12, min: 1, max: 12, step: 1 },
+    distanceFalloff: { value: 2.2, min: 0, max: 10 },
+  });
 
   return (
     <>
@@ -34,14 +49,8 @@ export default function Experience() {
       <Gltf receiveShadow castShadow src="./main.glb" position={[0, 0, 20]} />
       <Gltf receiveShadow castShadow src="./main.glb" position={[0, 0, -10]} />
       <Gltf receiveShadow castShadow src="./main.glb" position={[0, 0, -20]} /> */}
-      <EffectComposer>
-        <Bloom
-          mipmapBlur
-          luminanceThreshold={0.5}
-          luminanceSmoothing={0}
-          intensity={2}
-        />
-      </EffectComposer>
+
+      <SoftShadows size={20} />
 
       <OrbitControls makeDefault />
 
@@ -52,12 +61,13 @@ export default function Experience() {
         // files="night.hdr"
         files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/satara_night_no_lamps_1k.hdr"
       />
-      <directionalLight
-        castShadow
-        intensity={0.06}
-        position={[20, 100, 0]}
-        color={"#2b3c8f"}
-      />
+
+      <directionalLight position={[20, 25, 10]} intensity={0.05} castShadow>
+        <orthographicCamera
+          attach="shadow-camera"
+          args={[-20, 20, 20, -10, 1, 100]}
+        />
+      </directionalLight>
       {/* <spotLight
         intensity={0.1}
         angle={0.1}
@@ -145,6 +155,23 @@ export default function Experience() {
         <planeGeometry args={[100, 100]} />
         <meshStandardMaterial envMapIntensity={1} />
       </mesh>
+
+      {/* <EffectComposer disableNormalPass multisampling={0}>
+        <N8AO {...N8AOConfig} />
+      </EffectComposer> */}
+
+      <EffectComposer>
+        <N8AO {...N8AOConfig} />
+
+        <Bloom
+          mipmapBlur
+          luminanceThreshold={0.5}
+          luminanceSmoothing={0}
+          intensity={2}
+        />
+        <SMAA />
+        {/* <FXAA /> */}
+      </EffectComposer>
     </>
   );
 }
